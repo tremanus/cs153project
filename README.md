@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AI Amharic Tutor
 
-## Getting Started
+A voice-first AI conversation tutor for beginner Amharic learners. The app teaches through guided spoken dialogue while a companion website provides feedback, review, and progress tracking.
 
-First, run the development server:
+## What it does
+
+- **Practice**: Start a voice conversation with the AI tutor. Speak in Amharic, get guided responses with translations and hints.
+- **Review**: See saved vocabulary, past corrections, and phrase breakdowns from your sessions.
+- **Progress**: Track sessions completed, phrases learned, topic mastery, and areas to improve.
+
+## Current status
+
+- [x] Voice input via Web Speech API (Chrome/Edge, language set to Amharic)
+- [x] Three-tab UI: Practice / Review / Progress
+- [x] Mic-first interaction with text fallback
+- [x] Rich tutor messages (Amharic + transliteration + English + hints)
+- [ ] AI-powered tutor responses (currently uses scripted responses)
+- [ ] Text-to-speech for tutor output
+- [ ] Persistent session data (localStorage)
+- [ ] Conversation corrections and vocabulary extraction
+
+## Tech stack
+
+- Next.js (App Router)
+- Tailwind CSS
+- Web Speech API (browser-native speech recognition)
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in Chrome or Edge (required for speech recognition).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Scope
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project focuses on spoken beginner Amharic:
+- Greetings
+- Introductions
+- Family
+- Food
+- Daily life
+- Polite expressions
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+It does not cover alphabet/script instruction, reading, writing, or advanced grammar.
