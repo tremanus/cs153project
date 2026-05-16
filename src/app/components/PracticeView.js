@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 const TUTOR_SCRIPT = [
   {
@@ -100,16 +100,47 @@ export default function PracticeView({ onSessionUpdate }) {
     }
   }
 
+  const recognitionRef = useRef(null);
+
   function handleMicClick() {
     if (isListening) {
+      recognitionRef.current?.stop();
       setIsListening(false);
-    } else {
-      setIsListening(true);
-      // Voice recognition not yet connected — stop after a few seconds
-      setTimeout(() => {
-        setIsListening(false);
-      }, 3000);
+      return;
     }
+
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Speech recognition is not supported in this browser. Try Chrome or Edge.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "am-ET";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      if (transcript.trim()) {
+        submitMessage(transcript.trim());
+      }
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognitionRef.current = recognition;
+    recognition.start();
+    setIsListening(true);
   }
 
   function handleNewSession() {
